@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hello_world.h                                      :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 16:18:14 by mjacq             #+#    #+#             */
-/*   Updated: 2021/04/16 19:16:24 by mjacq            ###   ########.fr       */
+/*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
+/*   Updated: 2021/12/03 13:27:03 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELLO_WORLD_H
-# define HELLO_WORLD_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
-int	hello_world(void);
+# include "mlx.h"
+# include "libft.h"
 
 #endif

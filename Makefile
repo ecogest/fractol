@@ -10,9 +10,11 @@ CC        = clang
 CXX       = clang++
 CPPFLAGS  = -Iincludes
 CPPFLAGS += -Ilibft/includes
+CPPFLAGS += -Imlx
 CFLAGS    = -Wall -Werror -Wextra
 CFLAGS   += -g
 LDFLAGS   = -Llibft -lft
+LDFLAGS  += -Lmlx -lmlx -lXext -lX11 -lm -lbsd
 # CFLAGS   += -fsanitize=address
 # LDFLAGS  += -lasan
 
@@ -29,7 +31,7 @@ OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 #  ============================ LINK EXECUTABLE =============================  #
 
-$(NAME): libft/libft.a $(OBJDIR) $(OBJS) $(MAIN_OBJ)
+$(NAME): libft/libft.a mlx/libmlx.a $(OBJDIR) $(OBJS) $(MAIN_OBJ)
 	@$(CC) $(OBJS) $(MAIN_OBJ) $(LDFLAGS) -o $@
 	@printf "✨ $(BOLD)$(GREEN)%s$(NC)$(GREEN) has been successfully linked.\n$(NC)" $@
 
@@ -38,6 +40,10 @@ $(NAME): libft/libft.a $(OBJDIR) $(OBJS) $(MAIN_OBJ)
 libft/libft.a: libft
 libft:
 	@$(MAKE) --silent -C libft $(filter $(MAKECMDGOALS),clean fclean re)
+
+mlx/libmlx.a: mlx
+mlx:
+	@$(MAKE) --silent -C mlx $(filter $(MAKECMDGOALS),clean fclean re)
 
 # TODO: MAKE LIBFT AS A REAL PART, NOT A SUBMODULE
 
@@ -52,15 +58,15 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 # ================================= CLEANING ================================= #
 
-clean: libft
+clean: libft mlx
 	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
 	@rm -rf $(OBJDIR)
 
-fclean: clean libft
+fclean: clean libft mlx
 	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
 	@rm -f $(NAME) $(NAME_TEST)
 
-re: fclean all libft
+re: fclean all libft mlx
 
 clean-no-lib:
 	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
@@ -72,7 +78,7 @@ r: fclean-no-lib all
 
 #  ================================= .PHONY =================================  #
 
-.PHONY: all link clean fclean re libft test
+.PHONY: all link clean fclean re libft mlx test
 
 #  ================================= COLORS =================================  #
 
