@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   main_fractol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/03 13:50:33 by mjacq            ###   ########.fr       */
+/*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
+/*   Updated: 2021/12/03 13:50:13 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "fractol.h"
 
-# include "mlx.h"
-# include "libft.h"
+int	main_fractol(int ac, const char *av[])
+{
+	void	*mlx;
 
-int	main_fractol(int ac, const char *av[]);
-
-#endif
+	(void)ac;
+	(void)av;
+	ft_putstr("Libft is linked.\n");
+	mlx = mlx_init();
+	mlx_new_window(mlx, 720, 480, "fractol");
+	mlx_loop(mlx);
+	return (0);
+}
