@@ -39,7 +39,7 @@ libft/libft.a: libft
 libft:
 	@$(MAKE) --silent -C libft $(filter $(MAKECMDGOALS),clean fclean re)
 
-# TODO: if lib needed, add it to all, clean, fclean, and .PHONY's dependencies.
+# TODO: MAKE LIBFT AS A REAL PART, NOT A SUBMODULE
 
 #  ============================ COMPILE OBJECTS =============================  #
 
@@ -61,6 +61,14 @@ fclean: clean libft
 	@rm -f $(NAME) $(NAME_TEST)
 
 re: fclean all libft
+
+clean-no-lib:
+	@printf "$(MAGENTA)Cleaning objects.\n$(NC)"
+	@rm -rf $(OBJDIR)
+fclean-no-lib: clean-no-lib
+	@printf "$(MAGENTA)Removing binary: $(BOLD)%s\n$(NC)" $(NAME)
+	@rm -f $(NAME) $(NAME_TEST)
+r: fclean-no-lib all
 
 #  ================================= .PHONY =================================  #
 
