@@ -16,5 +16,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
+    - name: dependencies
+      run: sudo apt update; sudo apt-get install gcc make xorg libxext-dev libbsd-dev
     - name: make
       run: make
