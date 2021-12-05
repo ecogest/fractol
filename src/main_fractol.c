@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/05 15:48:08 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/05 16:18:44 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,17 @@ void	parse_args(t_root *root, int ac, const char *av[])
 		root->win.name = "Fractol";
 }
 
-void	win_init(t_win *win)
+int	key_hook(int key, t_win *win)
 {
-	win->mlx = mlx_init();
-	if (win->mlx)
-	{
-		win->width = WIN_WIDTH;
-		win->height = WIN_HEIGHT;
-		win->win = mlx_new_window(win->mlx, win->width, win->height, \
-				(char *)win->name);
-	}
-	if (!win->mlx || !win->win)
-		win->error = error;
+	if (key == XK_Escape)
+		mlx_loop_end(win->mlx);
+	return (0);
 }
 
-void	win_destroy(t_win *win)
+void	win_hook_and_loop(t_win *win)
 {
-	if (win->mlx && win->win)
-		mlx_destroy_window(win->mlx, win->win);
-	if (win->mlx)
-		mlx_destroy_display(win->mlx);
+	mlx_key_hook(win->win, key_hook, win);
+	mlx_loop(win->mlx);
 }
 
 	/* img_draw(circle); */
@@ -52,7 +43,7 @@ int	main_fractol(int ac, const char *av[])
 	root = (t_root){};
 	parse_args(&root, ac, av);
 	win_init(&root.win);
-	mlx_loop(root.win.mlx);
+	win_hook_and_loop(&root.win);
 	win_destroy(&root.win);
 	return (0);
 }
