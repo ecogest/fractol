@@ -3,6 +3,7 @@
 a.out
 fractol
 UnitTests
+tags
 
 # misc files that can clutter the directory
 compile_commands.json
