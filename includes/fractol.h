@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/05 15:31:10 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/05 15:38:48 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_win
 	const char	*name;
 	int			width;
 	int			height;
+	void		*mlx;
 	t_error		error;
 }				t_win;
 
@@ -48,7 +49,6 @@ typedef struct s_pixel
 
 typedef struct s_root
 {
-	void	*mlx;
 	t_win	win;
 	t_error	error;
 }			t_root;
