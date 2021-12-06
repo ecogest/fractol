@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 11:07:55 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 12:07:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "math.h"
 
 // Including defines for keyboard keys
 # define XK_MISCELLANY 1
@@ -52,12 +53,12 @@ typedef enum e_figname
 ** =============================== Structures =============================== **
 */
 
-typedef struct s_pixel
+typedef struct s_colors
 {
-	int	x;
-	int	y;
-	int	color;
-}		t_pixel;
+	int	bg;
+	int	border;
+	int	area;
+}		t_colors;
 
 typedef struct s_circle
 {
@@ -65,6 +66,43 @@ typedef struct s_circle
 	float	x0;
 	float	y0;
 }		t_circle;
+
+typedef struct s_offset
+{
+	int	x;
+	int	y;
+}		t_offset;
+
+typedef struct s_coordinates
+{
+	float	x;
+	float	y;
+}		t_coordinates;
+
+// typedef int (*is_in_figure_t)();
+
+/*
+** Drawing parameters:
+** offset: x,y px corresponding to (0,0) floating coordinates
+** scale: x px correspondig to 1 in floating coordinates
+*/
+
+	// is_in_figure_t	is_in_figure;
+typedef struct s_figure
+{
+	t_colors	colors;
+	t_offset	offset;
+	int			scale;
+	t_figname	name;
+	t_circle	circle;
+}				t_figure;
+
+typedef struct s_pixel
+{
+	int	x;
+	int	y;
+	int	color;
+}		t_pixel;
 
 typedef struct s_dim
 {
@@ -94,8 +132,9 @@ typedef struct s_win
 
 typedef struct s_root
 {
-	t_win	win;
-	t_error	error;
+	t_win		win;
+	t_figure	fig;
+	t_error		error;
 }			t_root;
 
 /*
@@ -104,6 +143,7 @@ typedef struct s_root
 
 // Main frame
 int		main_fractol(int ac, const char *av[]);
+void	parse_args(t_root *root, int ac, const char *av[]);
 void	win_init(t_win *win);
 void	win_destroy(t_win *win);
 
@@ -113,5 +153,6 @@ void	win_hook_and_loop(t_win *win);
 
 // Drawing functions
 void	img_px_put(t_img *img, t_pixel *px);
+void	win_put_bg(t_win *win, int bg_color);//TODO: Remove
 
 #endif
