@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 09:57:20 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 10:30:44 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	parse_args(t_root *root, int ac, const char *av[])
 	else
 		root->win.name = "Fractol";
 }
+
+/* void	win_change_background(t_win *win) */
+/* { */
+/* } */
 
 	/* img_draw(circle); */
 	/* img_render(); */

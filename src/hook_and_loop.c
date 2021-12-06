@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 09:56:28 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 09:56:35 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 10:21:22 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	key_hook(int key, t_win *win)
 
 void	win_hook_and_loop(t_win *win)
 {
-	mlx_key_hook(win->win, key_hook, win);
+	mlx_key_hook(win->ptr, key_hook, win);
 	mlx_loop(win->mlx);
 }
