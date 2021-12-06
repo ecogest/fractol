@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 15:39:26 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:18:02 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main_fractol(int ac, const char *av[])
 		win_init(&root.win);
 		fig_init(&root.fig, &root.win);
 		win_put_figure(&root.win, &root.fig);
-		win_hook_and_loop(&root.win);
+		f_hook_and_loop(&root);
 		if (root.win.error)
 			root.error = error_win;
 		win_destroy(&root.win);
