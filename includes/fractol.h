@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 16:10:39 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:08:05 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 
 // Used for more complex mlx_hook calls (need x_event, x_mask)
 # include "X11/X.h"
+// Clearer names than "Button1", "Button2", ..., "Button5"
+# define LEFT_CLICK 1
+# define MIDDLE_CLICK 2
+# define RIGHT_CLICK 3
+# define ZOOM_IN 4
+# define ZOOM_OUT 5
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
