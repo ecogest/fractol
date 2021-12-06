@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/05 16:18:44 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 11:08:19 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,23 @@ void	parse_args(t_root *root, int ac, const char *av[])
 		root->win.name = "Fractol";
 }
 
-int	key_hook(int key, t_win *win)
+void	win_change_background(t_win *win)
 {
-	if (key == XK_Escape)
-		mlx_loop_end(win->mlx);
-	return (0);
-}
+	t_img *const	img = &win->img;
+	t_pixel			px;
 
-void	win_hook_and_loop(t_win *win)
-{
-	mlx_key_hook(win->win, key_hook, win);
-	mlx_loop(win->mlx);
+	px = (t_pixel){.color = BG_COLOR};
+	while (px.y < img->dim->height)
+	{
+		while (px.x < img->dim->width)
+		{
+			img_px_put(img, &px);
+			px.x++;
+		}
+		px.x = 0;
+		px.y++;
+	}
+	mlx_put_image_to_window(win->mlx, win->ptr, img->ptr, 0, 0);
 }
 
 	/* img_draw(circle); */
@@ -43,6 +49,7 @@ int	main_fractol(int ac, const char *av[])
 	root = (t_root){};
 	parse_args(&root, ac, av);
 	win_init(&root.win);
+	win_change_background(&root.win);
 	win_hook_and_loop(&root.win);
 	win_destroy(&root.win);
 	return (0);
