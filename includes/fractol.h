@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 11:02:41 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 11:07:55 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,8 @@ void	win_destroy(t_win *win);
 // Hook and loop
 int		key_hook(int key, t_win *win);
 void	win_hook_and_loop(t_win *win);
+
+// Drawing functions
+void	img_px_put(t_img *img, t_pixel *px);
 
 #endif
