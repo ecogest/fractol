@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 11:31:03 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 11:33:44 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ void	win_hook_and_loop(t_win *win);
 
 // Drawing functions
 void	img_px_put(t_img *img, t_pixel *px);
+void	win_put_bg(t_win *win, int bg_color);//TODO: Remove
 
 #endif
