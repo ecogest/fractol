@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_fractol.c                                     :+:      :+:    :+:   */
+/*   hook_and_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 09:57:20 by mjacq            ###   ########.fr       */
+/*   Created: 2021/12/06 09:56:28 by mjacq             #+#    #+#             */
+/*   Updated: 2021/12/06 09:56:35 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-//TODO: error checking
-void	parse_args(t_root *root, int ac, const char *av[])
+int	key_hook(int key, t_win *win)
 {
-	if (ac == 2)
-		root->win.name = av[1];
-	else
-		root->win.name = "Fractol";
+	if (key == XK_Escape)
+		mlx_loop_end(win->mlx);
+	return (0);
 }
 
-	/* img_draw(circle); */
-	/* img_render(); */
-int	main_fractol(int ac, const char *av[])
+void	win_hook_and_loop(t_win *win)
 {
-	t_root	root;
-
-	root = (t_root){};
-	parse_args(&root, ac, av);
-	win_init(&root.win);
-	win_hook_and_loop(&root.win);
-	win_destroy(&root.win);
-	return (0);
+	mlx_key_hook(win->win, key_hook, win);
+	mlx_loop(win->mlx);
 }

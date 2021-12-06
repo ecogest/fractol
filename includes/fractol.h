@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 09:55:09 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 09:57:15 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,13 @@ typedef struct s_root
 ** =============================== Functions ================================ **
 */
 
+// Main frame
 int		main_fractol(int ac, const char *av[]);
 void	win_init(t_win *win);
 void	win_destroy(t_win *win);
+
+// Hook and loop
+int		key_hook(int key, t_win *win);
+void	win_hook_and_loop(t_win *win);
 
 #endif
