@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 18:51:15 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 19:23:46 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fig_init(t_figure *fig, t_win *win)
 			.three = COLOR_THREE, .bg = COLOR_BG};
 	fig->offset.x = win->dim.width / 2;
 	fig->offset.y = win->dim.height / 2;
-	fig->scale = fminf(win->dim.width / 4.0, win->dim.height / 2.0);
+	fig->scale = fminf(win->dim.width / 5.0, win->dim.height / 3.0);
 	fig->scale_start = fig->scale;
 	fig->max_iter = MAX_ITER_START;
 }

@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 19:21:12 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 19:28:09 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
 
-// Zoom speed
-# define ZOOM_SPEED 1.1
+/*
+** ================================ Defines ================================= **
+*/
 
+// window dimentions
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+
+// Zoom speed
+# define ZOOM_SPEED 1.1
 
 // Find beautiful palettes here: https://coolors.co/palettes/trending
 # define COLOR_MAX 0x264653
