@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 18:17:40 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 18:51:15 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	fig_px_set(t_figure *fig, t_pixel *px)
 
 	coordo.x = (px->x - fig->offset.x) / fig->scale;
 	coordo.y = (px->y - fig->offset.y) / fig->scale;
-	iterations = iter_mandelbrot(&coordo, fig->max_iter);
+	if (fig->name == fig_mandelbrot)
+		iterations = iter_mandelbrot(&coordo, fig->max_iter);
+	else
+		iterations = iter_julia(&coordo, &fig->z0, fig->max_iter);
 	if (iterations == fig->max_iter)
 		px->color = fig->colors.max;
 	else if (iterations > fig->max_iter - ITER_THRESHOLD_1)

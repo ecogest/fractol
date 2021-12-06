@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 18:32:08 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 19:21:12 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@
 # define ITER_THRESHOLD_1 4
 # define ITER_THRESHOLD_2 8
 # define ITER_THRESHOLD_3 12
+
+// Julia default parameters
+# define JULIA_DEF_X 0.3
+# define JULIA_DEF_Y 0.5
 
 /*
 ** ================================= Enums ================================== **
@@ -111,13 +115,14 @@ typedef struct s_coordinates
 
 typedef struct s_figure
 {
-	t_figname	name;
-	t_colors	colors;
-	t_offset	offset;
-	float		scale;
-	float		scale_start;
-	int			max_iter;
-}				t_figure;
+	t_figname		name;
+	t_coordinates	z0;
+	t_colors		colors;
+	t_offset		offset;
+	float			scale;
+	float			scale_start;
+	int				max_iter;
+}					t_figure;
 
 typedef struct s_pixel
 {
@@ -168,6 +173,7 @@ int		main_fractol(int ac, const char *av[]);
 void	parse_args(t_root *root, int ac, const char *av[]);
 void	win_init(t_win *win);
 void	win_destroy(t_win *win);
+void	f_usage(void);
 
 // Hook and loop
 void	f_hook_and_loop(t_root *root);

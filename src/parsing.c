@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 12:07:19 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 15:44:07 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 19:20:47 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@ static void	f_put_error_unsupported(const char *name)
 	ft_putendl_fd("'\e[0m", 2);
 }
 
-static void	f_usage(void)
-{
-	ft_putendl_fd("\e[33mUsage: ./fractol <fractal_name>", 2);
-	ft_putendl_fd("Supported fractals: mandelbrot, julia\e[0m", 2);
-}
-
 static t_figname	f_get_fractal_name(const char *name)
 {
 	if (ft_strequ(name, "mandelbrot"))
@@ -35,24 +29,48 @@ static t_figname	f_get_fractal_name(const char *name)
 		return (fig_unsupported);
 }
 
-static bool	f_is_fig_supported(t_figname name)
+/*
+** Could be used with av to get initial params for Julia
+*/
+
+void	parse_get_fig_param(t_root *root, int ac)
 {
-	return (name != fig_unsupported);
+	const t_figname	name = root->fig.name;
+
+	if (name == fig_mandelbrot && ac != 2)
+		root->error = error_args;
+	else if (name == fig_julia)
+	{
+		if (ac == 2)
+			root->fig.z0 = (t_coordinates){.x = JULIA_DEF_X, .y = JULIA_DEF_Y};
+		else
+			root->error = 1;
+	}
+}
+
+void	parse_get_name(t_root *root, const char *name)
+{
+	root->fig.name = f_get_fractal_name(name);
+	root->win.name = name;
+	if (root->fig.name == fig_unsupported)
+	{
+		f_put_error_unsupported(name);
+		root->error = error_args;
+	}
 }
 
 void	parse_args(t_root *root, int ac, const char *av[])
 {
-	if (ac == 2)
+	if (root->error)
+		return ;
+	if (ac >= 2)
 	{
-		root->fig.name = f_get_fractal_name(av[1]);
-		if (f_is_fig_supported(root->fig.name))
-		{
-			root->win.name = av[1];
-			return ;
-		}
-		else
-			f_put_error_unsupported(av[1]);
+		parse_get_name(root, av[1]);
+		if (!root->error)
+			parse_get_fig_param(root, ac);
 	}
-	f_usage();
-	root->error = error_args;
+	else
+		root->error = error_args;
+	if (root->error)
+		f_usage();
 }
