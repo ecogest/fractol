@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 17:18:02 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 18:17:40 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	fig_init(t_figure *fig, t_win *win)
 	fig->offset.x = win->dim.width / 2;
 	fig->offset.y = win->dim.height / 2;
 	fig->scale = fminf(win->dim.width / 4.0, win->dim.height / 2.0);
+	fig->scale_start = fig->scale;
 	fig->max_iter = MAX_ITER_START;
 }
 
@@ -33,11 +34,11 @@ void	fig_px_set(t_figure *fig, t_pixel *px)
 	iterations = iter_mandelbrot(&coordo, fig->max_iter);
 	if (iterations == fig->max_iter)
 		px->color = fig->colors.max;
-	else if (iterations > fig->max_iter - 4)
+	else if (iterations > fig->max_iter - ITER_THRESHOLD_1)
 		px->color = fig->colors.one;
-	else if (iterations > fig->max_iter - 8)
+	else if (iterations > fig->max_iter - ITER_THRESHOLD_2)
 		px->color = fig->colors.two;
-	else if (iterations > fig->max_iter - 12)
+	else if (iterations > fig->max_iter - ITER_THRESHOLD_3)
 		px->color = fig->colors.three;
 	else
 		px->color = fig->colors.bg;

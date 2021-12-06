@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 17:43:13 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 18:32:08 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,15 @@
 # define COLOR_THREE 0xf4a261
 # define COLOR_BG 0xe76f51
 
+// Number of iterations on startup and floor cap of this number
 # define MAX_ITER_START 16
+# define MIN_ITER 14
+
+// Three thresholds to select a display color according to the number of iter
+// required before ruling a pixel out of the fractal set
+# define ITER_THRESHOLD_1 4
+# define ITER_THRESHOLD_2 8
+# define ITER_THRESHOLD_3 12
 
 /*
 ** ================================= Enums ================================== **
@@ -98,6 +106,7 @@ typedef struct s_coordinates
 ** Drawing parameters:
 ** offset: x,y px corresponding to (0,0) floating coordinates
 ** scale: x px correspondig to 1 in floating coordinates
+** scale_start: used to adjust max_iter when zooming
 */
 
 typedef struct s_figure
@@ -106,6 +115,7 @@ typedef struct s_figure
 	t_colors	colors;
 	t_offset	offset;
 	float		scale;
+	float		scale_start;
 	int			max_iter;
 }				t_figure;
 

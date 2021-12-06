@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 17:42:53 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 17:43:14 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 18:27:35 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	hook_zoom(int button, int x, int y, t_root *root)
 		fig->scale /= (float)ZOOM_SPEED;
 		ft_putstr("Zoom out!\n");
 	}
+	fig->max_iter = ft_int_max(MIN_ITER, \
+			powf(fig->scale / fig->scale_start, 0.2) * MAX_ITER_START);
 	f_zoom_fix_offset(fig, x, y, old_scale);
 	win_put_figure(win, fig);
 	return (0);
