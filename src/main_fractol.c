@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 12:17:05 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 14:32:06 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,27 @@
 
 void	fig_init(t_figure *fig, t_win *win)
 {
-	fig->name = fig_circle;
+	fig->name = fig_mandelbrot;
 	fig->colors = (t_colors){\
 		.bg = BG_COLOR, .border = BORDER_COLOR, .area = AREA_COLOR};
 	fig->offset.x = win->dim.width / 2;
 	fig->offset.y = win->dim.height / 2;
-	fig->scale = 1;
-	fig->circle = (t_circle){50, 0, 0};
-}
-
-bool	is_in_circle(t_coordinates *m, t_circle *circle)
-{
-	return (powf(m->x - circle->x0, 2) + powf(m->y - circle->y0, 2) \
-			<= powf(circle->r, 2));
+	fig->scale = fminf(win->dim.width / 4.0, win->dim.height / 2.0);
+	fig->max_iter = MAX_ITER_START;
 }
 
 void	fig_px_set(t_figure *fig, t_pixel *px)
 {
 	t_coordinates	coordo;
+	int				iterations;
 
-	coordo.x = fig->scale * (px->x - fig->offset.x);
-	coordo.y = fig->scale * (px->y - fig->offset.y);
-	if (is_in_circle(&coordo, &fig->circle))
+	coordo.x = (px->x - fig->offset.x) / fig->scale;
+	coordo.y = (px->y - fig->offset.y) / fig->scale;
+	iterations = iter_mandelbrot(&coordo, fig->max_iter);
+	if (iterations == fig->max_iter)
 		px->color = fig->colors.area;
+	else if (iterations == fig->max_iter - 1)
+		px->color = fig->colors.border;
 	else
 		px->color = fig->colors.bg;
 }

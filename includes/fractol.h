@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 12:07:02 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 14:31:55 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "float.h"
 # include "math.h"
 
 // Including defines for keyboard keys
 # define XK_MISCELLANY 1
 # include "X11/keysymdef.h"
 
-# define WIN_WIDTH 720
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 
 # define BG_COLOR 0x0000ff
-# define BORDER_COLOR 0xff0000
+# define BORDER_COLOR 0x00ffff
 # define AREA_COLOR 0x000000
+
+# define MAX_ITER_START 15
 
 /*
 ** ================================= Enums ================================== **
@@ -44,7 +47,6 @@ typedef enum e_error
 
 typedef enum e_figname
 {
-	fig_circle,
 	fig_julia,
 	fig_mandelbrot
 }	t_figname;
@@ -60,13 +62,6 @@ typedef struct s_colors
 	int	area;
 }		t_colors;
 
-typedef struct s_circle
-{
-	float	r;
-	float	x0;
-	float	y0;
-}		t_circle;
-
 typedef struct s_offset
 {
 	int	x;
@@ -79,22 +74,19 @@ typedef struct s_coordinates
 	float	y;
 }		t_coordinates;
 
-// typedef int (*is_in_figure_t)();
-
 /*
 ** Drawing parameters:
 ** offset: x,y px corresponding to (0,0) floating coordinates
 ** scale: x px correspondig to 1 in floating coordinates
 */
 
-	// is_in_figure_t	is_in_figure;
 typedef struct s_figure
 {
 	t_colors	colors;
 	t_offset	offset;
-	int			scale;
+	float		scale;
 	t_figname	name;
-	t_circle	circle;
+	int			max_iter;
 }				t_figure;
 
 typedef struct s_pixel
@@ -154,5 +146,9 @@ void	win_hook_and_loop(t_win *win);
 // Drawing functions
 void	img_px_put(t_img *img, t_pixel *px);
 void	win_put_bg(t_win *win, int bg_color);//TODO: Remove
+
+// Algos
+int		iter_julia(t_coordinates *c, t_coordinates *zn, int max_iter);
+int		iter_mandelbrot(t_coordinates *c, int max_iter);
 
 #endif
