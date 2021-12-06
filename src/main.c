@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:19:00 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/03 13:49:54 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 15:41:01 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	main(int ac, const char *av[])
 {
-	main_fractol(ac, av);
-	return (0);
+	return (main_fractol(ac, av));
 }

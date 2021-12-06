@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 15:08:04 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 15:39:04 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@
 typedef enum e_error
 {
 	success = 0,
-	error
+	error,
+	error_win,
+	error_args
 }	t_error;
 
 typedef enum e_figname
 {
+	fig_unsupported,
 	fig_julia,
 	fig_mandelbrot
 }	t_figname;
@@ -87,10 +90,10 @@ typedef struct s_coordinates
 
 typedef struct s_figure
 {
+	t_figname	name;
 	t_colors	colors;
 	t_offset	offset;
 	float		scale;
-	t_figname	name;
 	int			max_iter;
 }				t_figure;
 
