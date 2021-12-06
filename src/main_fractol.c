@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 14:32:06 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 15:07:19 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	fig_init(t_figure *fig, t_win *win)
 {
 	fig->name = fig_mandelbrot;
 	fig->colors = (t_colors){\
-		.bg = BG_COLOR, .border = BORDER_COLOR, .area = AREA_COLOR};
+		.max = COLOR_MAX, .one = COLOR_ONE, .two = COLOR_TWO, \
+			.three = COLOR_THREE, .bg = COLOR_BG};
 	fig->offset.x = win->dim.width / 2;
 	fig->offset.y = win->dim.height / 2;
 	fig->scale = fminf(win->dim.width / 4.0, win->dim.height / 2.0);
@@ -32,9 +33,13 @@ void	fig_px_set(t_figure *fig, t_pixel *px)
 	coordo.y = (px->y - fig->offset.y) / fig->scale;
 	iterations = iter_mandelbrot(&coordo, fig->max_iter);
 	if (iterations == fig->max_iter)
-		px->color = fig->colors.area;
-	else if (iterations == fig->max_iter - 1)
-		px->color = fig->colors.border;
+		px->color = fig->colors.max;
+	else if (iterations > fig->max_iter - 4)
+		px->color = fig->colors.one;
+	else if (iterations > fig->max_iter - 8)
+		px->color = fig->colors.two;
+	else if (iterations > fig->max_iter - 12)
+		px->color = fig->colors.three;
 	else
 		px->color = fig->colors.bg;
 }

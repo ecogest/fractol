@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 14:31:55 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 15:08:04 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
-# define BG_COLOR 0x0000ff
-# define BORDER_COLOR 0x00ffff
-# define AREA_COLOR 0x000000
+// Find beautiful palettes here: https://coolors.co/palettes/trending
+# define COLOR_MAX 0x264653
+# define COLOR_ONE 0x2a9d8f
+# define COLOR_TWO 0xe9c46a
+# define COLOR_THREE 0xf4a261
+# define COLOR_BG 0xe76f51
 
-# define MAX_ITER_START 15
+# define MAX_ITER_START 16
 
 /*
 ** ================================= Enums ================================== **
@@ -57,9 +60,11 @@ typedef enum e_figname
 
 typedef struct s_colors
 {
+	int	max;
+	int	one;
+	int	two;
+	int	three;
 	int	bg;
-	int	border;
-	int	area;
 }		t_colors;
 
 typedef struct s_offset
