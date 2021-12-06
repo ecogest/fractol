@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 11:07:55 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 11:31:03 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef enum e_figname
 ** =============================== Structures =============================== **
 */
 
-typedef struct s_pixel
+typedef struct s_colors
 {
-	int	x;
-	int	y;
-	int	color;
-}		t_pixel;
+	int	bg;
+	int	border;
+	int	area;
+}		t_colors;
 
 typedef struct s_circle
 {
@@ -65,6 +65,20 @@ typedef struct s_circle
 	float	x0;
 	float	y0;
 }		t_circle;
+
+typedef struct s_figure
+{
+	t_colors	colors;
+	t_figname	name;
+	t_circle	circle;
+}				t_figure;
+
+typedef struct s_pixel
+{
+	int	x;
+	int	y;
+	int	color;
+}		t_pixel;
 
 typedef struct s_dim
 {
@@ -94,8 +108,9 @@ typedef struct s_win
 
 typedef struct s_root
 {
-	t_win	win;
-	t_error	error;
+	t_win		win;
+	t_figure	fig;
+	t_error		error;
 }			t_root;
 
 /*
