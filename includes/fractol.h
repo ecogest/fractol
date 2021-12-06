@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 17:08:05 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 17:43:13 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 # define RIGHT_CLICK 3
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
+
+// Zoom speed
+# define ZOOM_SPEED 1.1
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -157,12 +160,13 @@ void	win_init(t_win *win);
 void	win_destroy(t_win *win);
 
 // Hook and loop
-int		key_hook(int key, t_win *win);
-void	win_hook_and_loop(t_win *win);
+void	f_hook_and_loop(t_root *root);
+int		hook_zoom(int button, int x, int y, t_root *root);
 
 // Drawing functions
 void	img_px_put(t_img *img, t_pixel *px);
 void	win_put_bg(t_win *win, int bg_color);//TODO: Remove
+void	win_put_figure(t_win *win, t_figure *fig);
 
 // Algos
 int		iter_julia(t_coordinates *c, t_coordinates *zn, int max_iter);
