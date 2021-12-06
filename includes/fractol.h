@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 10:22:32 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/06 11:02:41 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WIN_WIDTH 720
 # define WIN_HEIGHT 480
 
-# define BG_COLOR 0xf0f0f0
+# define BG_COLOR 0x0000ff
 # define BORDER_COLOR 0xff0000
 # define AREA_COLOR 0x000000
 
@@ -56,6 +56,7 @@ typedef struct s_pixel
 {
 	int	x;
 	int	y;
+	int	color;
 }		t_pixel;
 
 typedef struct s_circle
