@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 12:07:19 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 10:00:35 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 10:22:22 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parse_get_fig_param(t_root *root, int ac)
 	else if (name == fig_julia)
 	{
 		if (ac == 2)
-			root->fig.c_julia = (t_coordinates) \
+			root->fig.julia_c = (t_coordinates) \
 			{.x = JULIA_DEF_X, .y = JULIA_DEF_Y};
 		else
 			root->error = 1;
