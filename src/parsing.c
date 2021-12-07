@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 12:07:19 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 10:22:22 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 11:42:18 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,8 @@ static t_figname	f_get_fractal_name(const char *name)
 
 void	parse_get_fig_param(t_root *root, int ac)
 {
-	const t_figname	name = root->fig.name;
-
-	if (name == fig_mandelbrot && ac != 2)
-		root->error = error_args;
-	else if (name == fig_julia)
-	{
-		if (ac == 2)
-			root->fig.julia_c = (t_coordinates) \
-			{.x = JULIA_DEF_X, .y = JULIA_DEF_Y};
-		else
-			root->error = 1;
-	}
+	if (ac > 2)
+		root->error = 1;
 }
 
 void	parse_get_name(t_root *root, const char *name)

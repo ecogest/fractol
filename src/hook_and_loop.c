@@ -6,14 +6,17 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 09:56:28 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 11:14:15 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 11:48:55 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
-** Quit on Esc, lock/unlock julia on Enter key
+** Mappings:
+** - Esc: quit
+** - Tab: switch figure
+** - Enter: lock julia's parameters
 */
 
 int	key_hook(int key, t_root *root)
@@ -28,6 +31,20 @@ int	key_hook(int key, t_root *root)
 		else
 			ft_putendl("Julia's param unlocked.");
 	}
+	else if (key == XK_Tab)
+	{
+		if (root->fig.name == fig_mandelbrot)
+		{
+			root->fig.name = fig_julia;
+			ft_putstr("Switch to Julia !\n");
+		}
+		else if (root->fig.name == fig_julia)
+		{
+			root->fig.name = fig_mandelbrot;
+			ft_putstr("Switch to Mandelbrot !\n");
+		}
+		win_put_figure(&root->win, &root->fig);
+	}
 	return (0);
 }
 
@@ -37,16 +54,10 @@ int	hook_click_close(t_win *win)
 	return (0);
 }
 
-/*
-** TODO: LEFT_CLICK to switch between figures
-*/
-
 int	hook_mouse(int button, int x, int y, t_root *root)
 {
 	if (button == ZOOM_IN || button == ZOOM_OUT)
 		hook_zoom(button, x, y, root);
-	else if (button == LEFT_CLICK)
-		ft_putstr("Switch between Julia and mandelbrot !\n");
 	return (0);
 }
 

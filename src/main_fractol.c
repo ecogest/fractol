@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 10:22:22 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 11:41:19 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	fig_init(t_figure *fig, t_win *win)
 	fig->scale = fminf(win->dim.width / 5.0, win->dim.height / 3.0);
 	fig->scale_start = fig->scale;
 	fig->max_iter = MAX_ITER_START;
+	fig->julia_c = (t_coordinates){.x = JULIA_DEF_X, .y = JULIA_DEF_Y};
 }
 
 /*
