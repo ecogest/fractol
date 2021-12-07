@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 11:09:30 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 12:07:41 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 16:26:44 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ static bool	f_has_mouse_moved_enough(int x, int y, t_win *win)
 	return (ft_int_abs(x - win->mouse.last_x) > MOUSE_MOVE_THRESHOLD \
 			|| ft_int_abs(y - win->mouse.last_y) > MOUSE_MOVE_THRESHOLD);
 }
-
-/*
-** TODO: divide delta cx and cy by scale
-*/
 
 int	hook_mouse_move(int x, int y, t_root *root)
 {

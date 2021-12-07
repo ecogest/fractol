@@ -15,24 +15,30 @@ CFLAGS    = -Wall -Werror -Wextra
 CFLAGS   += -g
 LDFLAGS   = -Llibft -lft
 LDFLAGS  += -Lmlx -lmlx -lXext -lX11 -lm -lbsd
-# CFLAGS   += -fsanitize=address
-# LDFLAGS  += -lasan
 
 #  ========================== SOURCES AND OBJECTS ===========================  #
 
 SRCDIR  = src
 OBJDIR  = obj
-MAIN_SRC = $(SRCDIR)/main.c
-MAIN_OBJ = $(OBJDIR)/main.o
-SRCS = $(filter-out $(MAIN_SRC), $(wildcard $(SRCDIR)/*.c))
+SRCS = src/main_fractol.c \
+			 src/hook_keyboard.c \
+			 src/win_init_destroy.c \
+			 src/f_usage.c \
+			 src/hook_mouse_button.c \
+			 src/hook_and_loop.c \
+			 src/parsing.c \
+			 src/main.c \
+			 src/iter_algos.c \
+			 src/fig_get_palette_and_color.c \
+			 src/hook_mouse_moves.c \
+			 src/img_px_put.c \
+			 src/palettes.c
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-
-# TODO: SET SOURCES MANUALLY BEFORE SUBMIT
 
 #  ============================ LINK EXECUTABLE =============================  #
 
-$(NAME): libft/libft.a mlx/libmlx.a $(OBJDIR) $(OBJS) $(MAIN_OBJ)
-	@$(CC) $(OBJS) $(MAIN_OBJ) $(LDFLAGS) -o $@
+$(NAME): libft/libft.a mlx/libmlx.a $(OBJDIR) $(OBJS)
+	@$(CC) $(OBJS) $(LDFLAGS) -o $@
 	@printf "✨ $(BOLD)$(GREEN)%s$(NC)$(GREEN) has been successfully linked.\n$(NC)" $@
 
 #  ============================== COMPILE LIBS ==============================  #

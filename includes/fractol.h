@@ -213,7 +213,6 @@ int		hook_keyboard(int key, t_root *root);
 
 // Drawing functions
 void	img_px_put(t_img *img, t_pixel *px);
-void	win_put_bg(t_win *win, int bg_color);//TODO: Remove
 void	win_put_figure(t_win *win, t_figure *fig);
 
 // Algos
