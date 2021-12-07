@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/06 19:23:46 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 09:59:25 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,24 @@ void	fig_init(t_figure *fig, t_win *win)
 	fig->max_iter = MAX_ITER_START;
 }
 
+/*
+** In order to correctly translate px->x and px->y into real coordo:
+** once y_0 is correctly set, remember that
+** 	 px->y increases when going down
+** 	 coordo->y increases when going up
+*/
+
 void	fig_px_set(t_figure *fig, t_pixel *px)
 {
 	t_coordinates	coordo;
 	int				iterations;
 
 	coordo.x = (px->x - fig->offset.x) / fig->scale;
-	coordo.y = (px->y - fig->offset.y) / fig->scale;
+	coordo.y = - (px->y - fig->offset.y) / fig->scale;
 	if (fig->name == fig_mandelbrot)
 		iterations = iter_mandelbrot(&coordo, fig->max_iter);
 	else
-		iterations = iter_julia(&coordo, &fig->z0, fig->max_iter);
+		iterations = iter_julia(&fig->c_julia, &coordo, fig->max_iter);
 	if (iterations == fig->max_iter)
 		px->color = fig->colors.max;
 	else if (iterations > fig->max_iter - ITER_THRESHOLD_1)
