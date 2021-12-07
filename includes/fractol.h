@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 15:11:05 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:19:14 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 // Including defines for keyboard keys
 # define XK_MISCELLANY 1
+# define XK_LATIN1 1
 # include "X11/keysymdef.h"
 
 // Used for more complex mlx_hook calls (need x_event, x_mask)

@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:18:23 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 12:58:48 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:28:58 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	f_move_view(int key, t_figure *fig, t_win *win)
 ** - Esc: quit
 ** - Tab: switch figure
 ** - Enter: lock julia's parameters
+** - c: change the colors
 */
 
 int	hook_keyboard(int key, t_root *root)
@@ -72,5 +73,11 @@ int	hook_keyboard(int key, t_root *root)
 		f_switch_between_figures(root);
 	else if (f_is_arrow_key(key))
 		f_move_view(key, &root->fig, &root->win);
+	else if (key == XK_c)
+	{
+		root->fig.palettes.choice = (root->fig.palettes.choice + 1) \
+									% PALETTES_COUNT;
+		win_put_figure(&root->win, &root->fig);
+	}
 	return (0);
 }

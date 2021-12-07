@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:12:41 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 15:11:35 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:27:52 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	palettes_init(t_palettes *palettes)
 				{0x264653, 0x2a9d8f, 0xe9c46a, 0xf4a261, 0xe76f51});
 		palette = &palettes->array[1];
 		palette_fill_colors(palette, 5, (int []) \
-				{0xCDB4DB, 0xFFC8DD, 0xFFAFCC, 0xBDE0FE, 0xA2D2FF});
+				{0x386641, 0x6A994E, 0xA7C957, 0xF2E8CF, 0xBC4749});
 		palette = &palettes->array[2];
 		palette_fill_colors(palette, 10, (int []) \
 				{0xF72585, 0xB5179E, 0x7209B7, 0x560BAD, 0x480CA8, \
