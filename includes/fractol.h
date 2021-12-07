@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 10:22:22 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 11:08:59 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 # include "mlx.h"
 # include "libft.h"
-# include "float.h"
-# include "math.h"
+# include <float.h>
+# include <math.h>
+# include <stdio.h>
 
 // Including defines for keyboard keys
 # define XK_MISCELLANY 1
@@ -153,11 +154,22 @@ typedef struct s_img
 	void	*ptr;
 }			t_img;
 
+/*
+** Remember mouse position to let julia param change with the pointers's pos.
+*/
+
+typedef struct s_mouse
+{
+	int	last_x;
+	int	last_y;
+}		t_mouse;
+
 typedef struct s_win
 {
 	const char	*name;
 	t_dim		dim;
 	t_img		img;
+	t_mouse		mouse;
 	void		*ptr;
 	void		*mlx;
 	t_error		error;
@@ -184,6 +196,7 @@ void	f_usage(void);
 // Hook and loop
 void	f_hook_and_loop(t_root *root);
 int		hook_zoom(int button, int x, int y, t_root *root);
+int		hook_mouse_move(int x, int y, t_root *root);
 
 // Drawing functions
 void	img_px_put(t_img *img, t_pixel *px);
