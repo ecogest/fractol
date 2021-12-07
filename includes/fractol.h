@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 14:17:52 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:11:05 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define MOUSE_MOVE_THRESHOLD 15
 
 // Find beautiful palettes here: https://coolors.co/palettes/trending
+# define PALETTES_COUNT 3
+# define PALETTES_CHOICE_START 0
 
 // Number of iterations on startup and floor cap of this number
 # define MAX_ITER_START 16
@@ -89,17 +91,17 @@ typedef enum e_figname
 ** =============================== Structures =============================== **
 */
 
-typedef struct s_palette
+typedef struct s_palt
 {
 	size_t	size;
 	int		*colors;
-}			t_palette;
+}			t_palt;
 
 typedef struct s_palettes
 {
 	size_t		count;
 	size_t		choice;
-	t_palette	*array;
+	t_palt		*array;
 	t_error		error;
 }				t_palettes;
 
@@ -199,6 +201,8 @@ void	f_usage(void);
 // Palettes
 void	palettes_init(t_palettes *palettes);
 void	palettes_free(t_palettes *palettes);
+int		fig_get_nth_color(t_figure *fig, size_t nth_color);
+t_palt	*fig_get_palette(t_figure *fig);
 
 // Hook and loop
 void	f_hook_and_loop(t_root *root);

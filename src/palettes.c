@@ -6,17 +6,17 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:12:41 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 14:17:38 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:11:35 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	palette_fill_colors(t_palette *palette, size_t size, int *colors)
+static void	palette_fill_colors(t_palt *palette, size_t size, int *colors)
 {
-	palette->size = 5;
+	palette->size = size;
 	palette->colors = malloc(sizeof(*palette->colors) * palette->size);
-	if (colors)
+	if (palette->colors)
 	{
 		while (size--)
 		{
@@ -50,8 +50,8 @@ static void	palettes_check_errors(t_palettes *palettes)
 
 void	palettes_free(t_palettes *palettes)
 {
-	size_t		i;
-	t_palette	*palette;
+	size_t	i;
+	t_palt	*palette;
 
 	if (palettes->array)
 	{
@@ -68,10 +68,10 @@ void	palettes_free(t_palettes *palettes)
 
 void	palettes_init(t_palettes *palettes)
 {
-	t_palette	*palette;
+	t_palt	*palette;
 
-	palettes->count = 2;
-	palettes->choice = 0;
+	palettes->count = PALETTES_COUNT;
+	palettes->choice = PALETTES_CHOICE_START;
 	palettes->array = malloc(sizeof(*palettes->array) * palettes->count);
 	if (palettes->array)
 	{
@@ -82,6 +82,10 @@ void	palettes_init(t_palettes *palettes)
 		palette = &palettes->array[1];
 		palette_fill_colors(palette, 5, (int []) \
 				{0xCDB4DB, 0xFFC8DD, 0xFFAFCC, 0xBDE0FE, 0xA2D2FF});
+		palette = &palettes->array[2];
+		palette_fill_colors(palette, 10, (int []) \
+				{0xF72585, 0xB5179E, 0x7209B7, 0x560BAD, 0x480CA8, \
+				0x3A0CA3, 0x3F37C9, 0x4361EE, 0x4895EF, 0x4CC9F0});
 		palettes_check_errors(palettes);
 	}
 	else

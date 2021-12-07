@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 14:15:07 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:07:34 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,22 @@ void	fig_init(t_figure *fig, t_win *win)
 	fig->julia_c = (t_coordinates){.x = JULIA_DEF_X, .y = JULIA_DEF_Y};
 }
 
-int	get_color(t_palettes *palettes, size_t i_color)
+int	px_get_iteration_color(int iterations, t_figure *fig)
 {
-	return (palettes->array[palettes->choice].colors[i_color]);
+	size_t	size;
+	size_t	i;
+
+	if (iterations == fig->max_iter)
+		return (fig_get_nth_color(fig, 0));
+	i = 0;
+	size = fig_get_palette(fig)->size;
+	while (i < size)
+	{
+		if (iterations > (int)(fig->max_iter * (1 - (i + 1) / (float)size)))
+			return (fig_get_nth_color(fig, i));
+		i++;
+	}
+	return (fig_get_nth_color(fig, size - 1));
 }
 
 /*
@@ -36,8 +49,8 @@ int	get_color(t_palettes *palettes, size_t i_color)
 
 void	fig_px_set(t_figure *fig, t_pixel *px)
 {
-	t_coordinates	candidate;
-	int				iterations;
+	t_coordinates		candidate;
+	int					iterations;
 
 	candidate.x = (px->x - fig->offset.x) / fig->scale;
 	candidate.y = - (px->y - fig->offset.y) / fig->scale;
@@ -45,16 +58,7 @@ void	fig_px_set(t_figure *fig, t_pixel *px)
 		iterations = iter_mandelbrot(&candidate, fig->max_iter);
 	else
 		iterations = iter_julia(&fig->julia_c, &candidate, fig->max_iter);
-	if (iterations == fig->max_iter)
-		px->color = get_color(&fig->palettes, 0);
-	else if (iterations > fig->max_iter - ITER_THRESHOLD_1)
-		px->color = get_color(&fig->palettes, 1);
-	else if (iterations > fig->max_iter - ITER_THRESHOLD_2)
-		px->color = get_color(&fig->palettes, 2);
-	else if (iterations > fig->max_iter - ITER_THRESHOLD_3)
-		px->color = get_color(&fig->palettes, 3);
-	else
-		px->color = get_color(&fig->palettes, 4);
+	px->color = px_get_iteration_color(iterations, fig);
 }
 
 void	win_put_figure(t_win *win, t_figure *fig)
