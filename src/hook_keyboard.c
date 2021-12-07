@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 12:18:23 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 12:21:35 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:58:48 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ static int	f_switch_between_figures(t_root *root)
 			&root->win.mouse.last_x, &root->win.mouse.last_y);
 	win_put_figure(&root->win, &root->fig);
 	return (0);
+}
+
+static bool	f_is_arrow_key(int key)
+{
+	return (key == XK_Up || key == XK_Down \
+			|| key == XK_Right || key == XK_Left);
+}
+
+static void	f_move_view(int key, t_figure *fig, t_win *win)
+{
+	t_offset *const	offset = &fig->offset;
+
+	offset->x += ((key == XK_Right) - (key == XK_Left)) * win->dim.width / 100;
+	offset->y -= ((key == XK_Up) - (key == XK_Down)) * win->dim.width / 100;
+	win_put_figure(win, fig);
 }
 
 /*
@@ -55,5 +70,7 @@ int	hook_keyboard(int key, t_root *root)
 	}
 	else if (key == XK_Tab)
 		f_switch_between_figures(root);
+	else if (f_is_arrow_key(key))
+		f_move_view(key, &root->fig, &root->win);
 	return (0);
 }
