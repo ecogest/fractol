@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 13:41:38 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 14:17:52 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@
 # define MOUSE_MOVE_THRESHOLD 15
 
 // Find beautiful palettes here: https://coolors.co/palettes/trending
-# define COLOR_MAX 0x264653
-# define COLOR_ONE 0x2a9d8f
-# define COLOR_TWO 0xe9c46a
-# define COLOR_THREE 0xf4a261
-# define COLOR_BG 0xe76f51
 
 // Number of iterations on startup and floor cap of this number
 # define MAX_ITER_START 16
@@ -98,7 +93,6 @@ typedef struct s_palette
 {
 	size_t	size;
 	int		*colors;
-	t_error	error;
 }			t_palette;
 
 typedef struct s_palettes
@@ -108,15 +102,6 @@ typedef struct s_palettes
 	t_palette	*array;
 	t_error		error;
 }				t_palettes;
-
-typedef struct s_colors
-{
-	int	max;
-	int	one;
-	int	two;
-	int	three;
-	int	bg;
-}		t_colors;
 
 typedef struct s_offset
 {
@@ -142,7 +127,6 @@ typedef struct s_figure
 	t_figname		name;
 	t_coordinates	julia_c;
 	bool			julia_lock;
-	t_colors		colors;
 	t_palettes		palettes;
 	t_offset		offset;
 	float			scale;
@@ -211,6 +195,10 @@ void	parse_args(t_root *root, int ac, const char *av[]);
 void	win_init(t_win *win);
 void	win_destroy(t_win *win);
 void	f_usage(void);
+
+// Palettes
+void	palettes_init(t_palettes *palettes);
+void	palettes_free(t_palettes *palettes);
 
 // Hook and loop
 void	f_hook_and_loop(t_root *root);

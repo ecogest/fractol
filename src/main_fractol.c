@@ -6,51 +6,14 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 13:43:07 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 14:15:07 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	palette_fill_colors(t_palette *palette, size_t size, int *colors)
-{
-	palette->size = 5;
-	palette->colors = malloc(sizeof(*palette->colors) * palette->size);
-	if (colors)
-	{
-		while (size--)
-		{
-			palette->colors[size] = colors[size];
-		}
-	}
-	else
-		palette->error = error;
-}
-
-void	palettes_init(t_palettes *palettes)
-{
-	t_palette	*palette;
-
-	palettes->count = 1;
-	palettes->array = malloc(sizeof(*palettes->array) * palettes->count);
-	if (palettes->array)
-	{
-		ft_bzero(palettes->array, sizeof(*palettes->array) * palettes->count);
-		palette = &palettes->array[0];
-		palette_fill_colors(palette, 5, (int []){0x264653, 0x2a9d8f, 0xe9c46a, 0xf4a261, 0xe76f51});
-		if (palette->error)
-			palettes->error = error;
-	}
-	else
-		palettes->error = error;
-}
-
 void	fig_init(t_figure *fig, t_win *win)
 {
-	fig->colors = (t_colors){\
-		.max = COLOR_MAX, .one = COLOR_ONE, .two = COLOR_TWO, \
-			.three = COLOR_THREE, .bg = COLOR_BG};
-	palettes_init(&fig->palettes);
 	fig->offset.x = win->dim.width / 2;
 	fig->offset.y = win->dim.height / 2;
 	fig->scale = fminf(win->dim.width / 5.0, win->dim.height / 3.0);
@@ -122,15 +85,21 @@ int	main_fractol(int ac, const char *av[])
 	parse_args(&root, ac, av);
 	if (!root.error)
 	{
-		win_init(&root.win);
-		fig_init(&root.fig, &root.win);
-		win_put_figure(&root.win, &root.fig);
-		f_hook_and_loop(&root);
-		if (root.win.error)
-			root.error = error_win;
-		win_destroy(&root.win);
+		palettes_init(&root.fig.palettes);
+		if (!root.fig.palettes.error)
+		{
+			win_init(&root.win);
+			if (!root.win.error)
+			{
+				fig_init(&root.fig, &root.win);
+				win_put_figure(&root.win, &root.fig);
+				f_hook_and_loop(&root);
+			}
+			win_destroy(&root.win);
+		}
+		palettes_free(&root.fig.palettes);
 	}
-	if (root.error)
+	if (root.error || root.win.error || root.fig.palettes.error)
 		return (1);
 	else
 		return (0);
