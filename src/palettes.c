@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:12:41 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 15:27:52 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:56:21 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ void	palettes_free(t_palettes *palettes)
 	}
 }
 
+/*
+** More palettes:
+**		palette = &palettes->array[3];
+**		palette_fill_colors(palette, 10, (int []) \
+**				{0xF72585, 0xB5179E, 0x7209B7, 0x560BAD, 0x480CA8, \
+**				0x3A0CA3, 0x3F37C9, 0x4361EE, 0x4895EF, 0x4CC9F0});
+*/
+
 void	palettes_init(t_palettes *palettes)
 {
 	t_palt	*palette;
@@ -80,12 +88,13 @@ void	palettes_init(t_palettes *palettes)
 		palette_fill_colors(palette, 5, (int []) \
 				{0x264653, 0x2a9d8f, 0xe9c46a, 0xf4a261, 0xe76f51});
 		palette = &palettes->array[1];
-		palette_fill_colors(palette, 5, (int []) \
-				{0x386641, 0x6A994E, 0xA7C957, 0xF2E8CF, 0xBC4749});
+		palette_fill_colors(palette, 8, (int []) \
+				{0x24283B, 0xF7768E, 0x9ECE6A, 0xE0AF68, 0x7AA2F7, \
+				0xBB9AF7, 0x7DCFFF, 0x414868});
 		palette = &palettes->array[2];
 		palette_fill_colors(palette, 10, (int []) \
-				{0xF72585, 0xB5179E, 0x7209B7, 0x560BAD, 0x480CA8, \
-				0x3A0CA3, 0x3F37C9, 0x4361EE, 0x4895EF, 0x4CC9F0});
+				{0x797D62, 0x9B9B7A, 0xBAA587, 0xD9AE94, 0xF1DCA7, \
+				0xFFCB69, 0xE8AC65, 0xD08C60, 0xB58463, 0x997B66});
 		palettes_check_errors(palettes);
 	}
 	else
