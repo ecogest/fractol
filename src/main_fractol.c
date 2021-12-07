@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 11:41:19 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 15:07:34 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,30 @@
 
 void	fig_init(t_figure *fig, t_win *win)
 {
-	fig->colors = (t_colors){\
-		.max = COLOR_MAX, .one = COLOR_ONE, .two = COLOR_TWO, \
-			.three = COLOR_THREE, .bg = COLOR_BG};
 	fig->offset.x = win->dim.width / 2;
 	fig->offset.y = win->dim.height / 2;
 	fig->scale = fminf(win->dim.width / 5.0, win->dim.height / 3.0);
 	fig->scale_start = fig->scale;
 	fig->max_iter = MAX_ITER_START;
 	fig->julia_c = (t_coordinates){.x = JULIA_DEF_X, .y = JULIA_DEF_Y};
+}
+
+int	px_get_iteration_color(int iterations, t_figure *fig)
+{
+	size_t	size;
+	size_t	i;
+
+	if (iterations == fig->max_iter)
+		return (fig_get_nth_color(fig, 0));
+	i = 0;
+	size = fig_get_palette(fig)->size;
+	while (i < size)
+	{
+		if (iterations > (int)(fig->max_iter * (1 - (i + 1) / (float)size)))
+			return (fig_get_nth_color(fig, i));
+		i++;
+	}
+	return (fig_get_nth_color(fig, size - 1));
 }
 
 /*
@@ -34,8 +49,8 @@ void	fig_init(t_figure *fig, t_win *win)
 
 void	fig_px_set(t_figure *fig, t_pixel *px)
 {
-	t_coordinates	candidate;
-	int				iterations;
+	t_coordinates		candidate;
+	int					iterations;
 
 	candidate.x = (px->x - fig->offset.x) / fig->scale;
 	candidate.y = - (px->y - fig->offset.y) / fig->scale;
@@ -43,16 +58,7 @@ void	fig_px_set(t_figure *fig, t_pixel *px)
 		iterations = iter_mandelbrot(&candidate, fig->max_iter);
 	else
 		iterations = iter_julia(&fig->julia_c, &candidate, fig->max_iter);
-	if (iterations == fig->max_iter)
-		px->color = fig->colors.max;
-	else if (iterations > fig->max_iter - ITER_THRESHOLD_1)
-		px->color = fig->colors.one;
-	else if (iterations > fig->max_iter - ITER_THRESHOLD_2)
-		px->color = fig->colors.two;
-	else if (iterations > fig->max_iter - ITER_THRESHOLD_3)
-		px->color = fig->colors.three;
-	else
-		px->color = fig->colors.bg;
+	px->color = px_get_iteration_color(iterations, fig);
 }
 
 void	win_put_figure(t_win *win, t_figure *fig)
@@ -83,15 +89,21 @@ int	main_fractol(int ac, const char *av[])
 	parse_args(&root, ac, av);
 	if (!root.error)
 	{
-		win_init(&root.win);
-		fig_init(&root.fig, &root.win);
-		win_put_figure(&root.win, &root.fig);
-		f_hook_and_loop(&root);
-		if (root.win.error)
-			root.error = error_win;
-		win_destroy(&root.win);
+		palettes_init(&root.fig.palettes);
+		if (!root.fig.palettes.error)
+		{
+			win_init(&root.win);
+			if (!root.win.error)
+			{
+				fig_init(&root.fig, &root.win);
+				win_put_figure(&root.win, &root.fig);
+				f_hook_and_loop(&root);
+			}
+			win_destroy(&root.win);
+		}
+		palettes_free(&root.fig.palettes);
 	}
-	if (root.error)
+	if (root.error || root.win.error || root.fig.palettes.error)
 		return (1);
 	else
 		return (0);
