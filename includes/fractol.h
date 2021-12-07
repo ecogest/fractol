@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 15:56:53 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 16:02:07 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@
 # define PALETTES_CHOICE_START 0
 
 // Number of iterations on startup and floor cap of this number
-# define MAX_ITER_START 25
-# define MIN_ITER 22
+# define MAX_ITER_START 20
+# define MIN_ITER 15
 
 // Three thresholds to select a display color according to the number of iter
 // required before ruling a pixel out of the fractal set
