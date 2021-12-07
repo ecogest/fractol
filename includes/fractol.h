@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 11:08:59 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:06:18 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 
 // Zoom speed
 # define ZOOM_SPEED 1.1
+
+// Mouse move threshold (in pixels)
+# define MOUSE_MOVE_THRESHOLD 20
 
 // Find beautiful palettes here: https://coolors.co/palettes/trending
 # define COLOR_MAX 0x264653
