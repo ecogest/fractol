@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 09:59:25 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 10:09:20 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_figure
 {
 	t_figname		name;
 	t_coordinates	c_julia;
+	bool			lock_julia;
 	t_colors		colors;
 	t_offset		offset;
 	float			scale;
