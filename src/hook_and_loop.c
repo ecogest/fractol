@@ -6,14 +6,14 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 09:56:28 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 10:20:16 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 10:22:56 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
-** Quit on Esc, lock/unlock julia on Space
+** Quit on Esc, lock/unlock julia on Enter key
 */
 
 int	key_hook(int key, t_root *root)
@@ -22,8 +22,8 @@ int	key_hook(int key, t_root *root)
 		mlx_loop_end(root->win.mlx);
 	else if (key == XK_Return && root->fig.name == fig_julia)
 	{
-		root->fig.lock_julia = !root->fig.lock_julia;
-		if (root->fig.lock_julia)
+		root->fig.julia_lock = !root->fig.julia_lock;
+		if (root->fig.julia_lock)
 			ft_putendl("Julia's param locked.");
 		else
 			ft_putendl("Julia's param unlocked.");

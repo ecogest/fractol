@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:48:59 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 10:12:21 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 10:22:22 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fig_px_set(t_figure *fig, t_pixel *px)
 	if (fig->name == fig_mandelbrot)
 		iterations = iter_mandelbrot(&candidate, fig->max_iter);
 	else
-		iterations = iter_julia(&fig->c_julia, &candidate, fig->max_iter);
+		iterations = iter_julia(&fig->julia_c, &candidate, fig->max_iter);
 	if (iterations == fig->max_iter)
 		px->color = fig->colors.max;
 	else if (iterations > fig->max_iter - ITER_THRESHOLD_1)
