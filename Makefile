@@ -51,8 +51,6 @@ mlx/libmlx.a: mlx
 mlx:
 	@$(MAKE) --silent -C mlx $(filter $(MAKECMDGOALS),clean fclean re)
 
-# TODO: MAKE LIBFT AS A REAL PART, NOT A SUBMODULE
-
 #  ============================ COMPILE OBJECTS =============================  #
 
 $(OBJDIR):
