@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 12:17:59 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 13:41:38 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,21 @@ typedef enum e_figname
 ** =============================== Structures =============================== **
 */
 
+typedef struct s_palette
+{
+	size_t	size;
+	int		*colors;
+	t_error	error;
+}			t_palette;
+
+typedef struct s_palettes
+{
+	size_t		count;
+	size_t		choice;
+	t_palette	*array;
+	t_error		error;
+}				t_palettes;
+
 typedef struct s_colors
 {
 	int	max;
@@ -128,6 +143,7 @@ typedef struct s_figure
 	t_coordinates	julia_c;
 	bool			julia_lock;
 	t_colors		colors;
+	t_palettes		palettes;
 	t_offset		offset;
 	float			scale;
 	float			scale_start;
