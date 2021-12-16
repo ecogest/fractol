@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:12:41 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 15:56:21 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 17:22:35 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ void	palettes_init(t_palettes *palettes)
 		palette_fill_colors(palette, 5, (int []) \
 				{0x264653, 0x2a9d8f, 0xe9c46a, 0xf4a261, 0xe76f51});
 		palette = &palettes->array[1];
-		palette_fill_colors(palette, 8, (int []) \
-				{0x24283B, 0xF7768E, 0x9ECE6A, 0xE0AF68, 0x7AA2F7, \
-				0xBB9AF7, 0x7DCFFF, 0x414868});
-		palette = &palettes->array[2];
 		palette_fill_colors(palette, 10, (int []) \
 				{0x797D62, 0x9B9B7A, 0xBAA587, 0xD9AE94, 0xF1DCA7, \
 				0xFFCB69, 0xE8AC65, 0xD08C60, 0xB58463, 0x997B66});
+		palette = &palettes->array[2];
+		palette_fill_colors(palette, 20, (int []) \
+				{0xC0392B, 0xC0392B, 0x9B59B6, 0x8E44AD, 0x2980B9, \
+				0x3498DB, 0x1ABC9C, 0x16A085, 0x27AE60, 0x2ECC71, \
+				0xF1C40F, 0xF39C12, 0xE67E22, 0xD35400, 0xECF0F1, \
+				0xBDC3C7, 0x95A5A6, 0x7F8C8D, 0x34495E, 0x2C3E50});
 		palettes_check_errors(palettes);
 	}
 	else

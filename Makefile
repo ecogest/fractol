@@ -80,9 +80,14 @@ fclean-no-lib: clean-no-lib
 	@rm -f $(NAME) $(NAME_TEST)
 r: fclean-no-lib all
 
+#  ================================= Bonus ==================================  #
+
+# No forbidden functions used, bonuses are the same as regular sources
+bonus: all
+
 #  ================================= .PHONY =================================  #
 
-.PHONY: all link clean fclean re libft mlx test
+.PHONY: all link clean fclean re libft mlx bonus
 
 #  ================================= COLORS =================================  #
 

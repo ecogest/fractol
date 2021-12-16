@@ -6,7 +6,7 @@
 /*   By: mjacq <mjacq@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:26:24 by mjacq             #+#    #+#             */
-/*   Updated: 2021/12/07 16:02:07 by mjacq            ###   ########.fr       */
+/*   Updated: 2021/12/07 17:33:12 by mjacq            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 */
 
 // window dimentions
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1980
+# define WIN_HEIGHT 1080
 
 // Zoom speed
 # define ZOOM_SPEED 1.1
@@ -56,8 +56,8 @@
 # define PALETTES_CHOICE_START 0
 
 // Number of iterations on startup and floor cap of this number
-# define MAX_ITER_START 20
-# define MIN_ITER 15
+# define MAX_ITER_START 22
+# define MIN_ITER 21
 
 // Three thresholds to select a display color according to the number of iter
 // required before ruling a pixel out of the fractal set
